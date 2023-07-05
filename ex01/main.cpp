@@ -106,8 +106,9 @@ void    test8()
 {
     main_print_banner("TEST 8 form with empty string name");
     {
-        Form form("", 22);
-        std::cout << form;
+        Form f1("", 22);
+        std::cout << f1;
+   
     }
 }
 
@@ -116,7 +117,7 @@ void    test9()
     main_print_banner("TEST 9 bureaucrat try sign null pointer");
     {
         Bureaucrat b("Calimero", 150);
-        b.signForm(NULL);
+        b.signForm(NULL); 
     }
 }
 
