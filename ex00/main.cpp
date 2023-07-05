@@ -92,7 +92,7 @@ void    test7()
 
 void    test8()
 {
-    main_print_banner("TEST bureaucrat with empty string name");
+    main_print_banner("TEST 8 bureaucrat with empty string name");
     {
         Bureaucrat bureaucrat("", 22);
         std::cout << bureaucrat;
