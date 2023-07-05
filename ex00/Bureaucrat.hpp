@@ -28,7 +28,7 @@ public:
         
 private:
     
-    class GradeTooHightException :public std::runtime_error { public: GradeTooHightException();};
+    class GradeTooHighException :public std::runtime_error { public: GradeTooHighException();};
     class GradeTooLowException   :public std::runtime_error { public: GradeTooLowException  ();};
 
 	const std::string	_name;

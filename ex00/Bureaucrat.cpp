@@ -8,7 +8,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
     if (this->_grade > this->_minGrade)
         throw Bureaucrat::GradeTooLowException();
     if (this->_grade < this->_maxGrade)
-        throw Bureaucrat::GradeTooHightException();
+        throw Bureaucrat::GradeTooHighException();
 }
 
 Bureaucrat::~Bureaucrat(void)
@@ -44,7 +44,7 @@ void Bureaucrat::increaseGrade(void)
 
     this->_grade--;
     if (this->_grade < this->_maxGrade)
-        throw Bureaucrat::GradeTooHightException();
+        throw Bureaucrat::GradeTooHighException();
 }
 
 void Bureaucrat::decreaseGrade(void)
@@ -57,8 +57,8 @@ void Bureaucrat::decreaseGrade(void)
 }
 
 // Exceptions
-Bureaucrat::GradeTooHightException::GradeTooHightException() :
-    std::runtime_error("\033[1;31mstd::exception => Bureaucrat::GradeTooHightException\033[0m\n"){}
+Bureaucrat::GradeTooHighException::GradeTooHighException() :
+    std::runtime_error("\033[1;31mstd::exception => Bureaucrat::GradeTooHighException\033[0m\n"){}
 
 Bureaucrat::GradeTooLowException::GradeTooLowException() : 
     std::runtime_error("\033[1;31mstd::exception => Bureaucrat::GradeTooLowException\033[0m\n"){}
