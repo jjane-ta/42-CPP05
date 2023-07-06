@@ -18,15 +18,16 @@ class Form {
 
 public:
     
-	Form ( std::string name, int grade );
+	Form ( std::string name, int grade2sign, int grade2exec );
 	virtual ~Form ( void );
 	Form (const Form &form);
-	Form operator = (const Form &form);
+	Form & operator = (Form &form);
 
-	const std::string	getName		( void ) const;
-	int					getGrade	( void ) const;
-	bool				isSigned	( void );
-	void				beSigned	( const Bureaucrat &bureaucrat);
+	const std::string	getName			( void ) const;
+	int					getGrade2Sign	( void ) const;
+	int					getGrade2Exec	( void ) const;
+	bool				isSigned		( void );
+	void				beSigned		( const Bureaucrat &bureaucrat);
 
 	class GradeTooHighException :public std::runtime_error { public: GradeTooHighException();};
     class GradeTooLowException  :public std::runtime_error { public: GradeTooLowException ();};
@@ -34,7 +35,8 @@ public:
 private:	
 
 	const std::string	_name;
-	const int			_grade;
+	const int			_grade2sign;
+	const int			_grade2exec;
 	bool				_is_signed;
 
 	static const int    _maxGrade = 1;

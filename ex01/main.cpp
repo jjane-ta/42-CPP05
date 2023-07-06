@@ -10,114 +10,142 @@ void	main_print_banner(std::string title);
 
 void    test1()
 {
-    main_print_banner("TEST 1 forms create/validateGrade/print/destroy");
+    main_print_banner("TEST 1 forms create-print-sign-print-destroy");
     {
-        Form f1("150A", 150);
+        Form f1("150-150A", 150, 150);
+        Form f2("001-150A", 1, 150);
+        Form f3("", 2, 150);
+
         std::cout << f1;
-        Form f2("75A", 75);
         std::cout << f2;
-        Form f3("1A", 1);
+        std::cout << f3;
+
+        Bureaucrat b("Regio", 1);
+        std::cout << b;
+        b.signForm(&f1);
+        b.signForm(&f2);
+        b.signForm(&f3);
+
+        std::cout << f1;
+        std::cout << f2;
         std::cout << f3;
     }
 }
 
 void    test2()
 {
-    main_print_banner("TEST 2 form create with hight garde 0");
+    main_print_banner("TEST 2 form create with hight garde to_sign 0");
     {
-        Form form("00E", 0);
+        Form form("000-150E", 0, 150);
         std::cout << form;
     }
 }
 
 void    test3()
 {
-    main_print_banner("TEST 3 form create with low garde 151");
+    main_print_banner("TEST 3 form create with low garde to_sign 151");
     {
-        Form form("151E", 151);
+        Form form("151-150E", 151, 150);
         std::cout << form;
     }
 }
 
 void    test4()
 {
-    main_print_banner("TEST 4 constructor copy && bureaucrat sign one of them NO EXCEPTz");
+    main_print_banner("TEST 4 form create with hight garde to_exec 0");
     {
-        Bureaucrat b("Calimero", 1);
-        Form f1("30F", 30);
-        Form f2(f1);
-        std::cout << f1;
-        std::cout << f2;
-        b.signForm(&f1);
-        std::cout << f1;
-        std::cout << f2;
+        Form form("001-000E", 1, 0);
+        std::cout << form;
     }
 }
 
 void    test5()
 {
-    main_print_banner("TEST 4 operator copy && bureaucrat sign one of them NO EXCEPT");
+    main_print_banner("TEST 5 form create with low garde to_exec 151");
     {
-        Bureaucrat b("Calimero", 1);
-        Form f1("30F", 30);
-        Form f2("40F", 40);
-        std::cout << f1;
-        std::cout << f2;
-        f1 = f2; 
-        b.signForm(&f1);
-        std::cout << f1;
-        std::cout << f2;
+        Form form("001-151E", 1, 151);
+        std::cout << form;
     }
 }
 
-
-void    test6()
-{
-    main_print_banner("TEST  constructor copy && bureaucrat sign one of them caching EXCEPT");
+void test6() {
+    main_print_banner("TEST 6 bureaucrat grade 2 try to sign form grade to_sign 1");
     {
-        Bureaucrat b("Calimero", 150);
-        Form f1("30F", 30);
-        Form f2(f1);
-        std::cout << f1;
-        std::cout << f2;
+        Form f1("001-150A", 1, 150);
+        std::cout << f1;    
+
+        Bureaucrat b("Fleming", 2);
+        std::cout << b;
         b.signForm(&f1);
+
         std::cout << f1;
-        std::cout << f2;
     }
 }
 
-void    test7()
-{
-    main_print_banner("TEST 7 operator copy && bureaucrat sign one of them  caching EXCEPT");
+void test7() {
+    main_print_banner("TEST 7 bureaucrat grade 2 try to sign NULL form");
     {
-        Bureaucrat b("Calimero", 150);
-        Form f1("30F", 30);
-        Form f2("40F", 40);
-        std::cout << f1;
-        std::cout << f2;
-        f1 = f2; 
-        b.signForm(&f1);
-        std::cout << f1;
-        std::cout << f2;
+        Bureaucrat b("Fleming", 2);
+        std::cout << b;
+        b.signForm(NULL);
     }
 }
 
-void    test8()
-{
-    main_print_banner("TEST 8 form with empty string name");
+void test8() {
+    main_print_banner("TEST 8 bureaucrat and form empty name");
     {
-        Form f1("", 22);
-        std::cout << f1;
-   
+        Bureaucrat b("", 2);
+        Form f("", 1,1);
+        std::cout << b;
+        std::cout << f;
     }
 }
 
 void    test9()
 {
-    main_print_banner("TEST 9 bureaucrat try sign null pointer");
+    main_print_banner("TEST 9 form constructor copy and sign original");
     {
-        Bureaucrat b("Calimero", 150);
-        b.signForm(NULL); 
+        Form f1("030-150F", 30, 150);
+        Form f2(f1);
+        std::cout << f1;
+        std::cout << f2;
+
+        Bureaucrat b("Serius", 1);
+        std::cout << b;
+
+        b.signForm(&f1);
+        std::cout << f1;
+        std::cout << f2;
+    }
+}
+
+void    test10()
+{
+    main_print_banner("TEST 10 form constructor copy a signed form");
+    {
+        Form f1("030-150F", 30, 150);
+        std::cout << f1;
+        Bureaucrat b("Rigorous", 1);
+        std::cout << b;
+        b.signForm(&f1);
+        std::cout << f1;
+        Form f2(f1);
+        std::cout << f2;
+    }
+}
+
+void    test11()
+{
+    main_print_banner("TEST 11 form copy operator");
+    {
+        Form f1("030-150F", 30, 150);
+        Form f2("040-150F", 40, 150);
+        std::cout << f1;
+        std::cout << f2;
+        f1 = f2;
+        std::cout << f1;
+        std::cout << f2;
+
     }
 }
 
@@ -133,7 +161,8 @@ int	main ( void )
         test6,
         test7,
         test8,
-        test9
+        test9,
+        test10
     };
 
     for (int test_num = 0; test_num < (int)(sizeof(functions) / sizeof(void *)); test_num++)

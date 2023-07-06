@@ -2,14 +2,15 @@
 
 
 // OCCP
-Form::Form ( std::string name, int grade ):
+Form::Form ( std::string name, int grade2sign, int grade2exec):
     _name(name),
-    _grade(grade),
+    _grade2sign(grade2sign),
+    _grade2exec(grade2exec),
     _is_signed(false)
 {
-    if (this->_grade > this->_minGrade)
+    if (this->_grade2sign > this->_minGrade || this->_grade2exec > this->_minGrade)
         throw Form::GradeTooLowException();
-    if (this->_grade < this->_maxGrade)
+    if (this->_grade2sign < this->_maxGrade || this->_grade2exec < this->_maxGrade)
         throw Form::GradeTooHighException();
 }
 
@@ -18,20 +19,28 @@ Form::~Form ( void )
 
 Form::Form (const Form &form):
     _name(form._name),
-    _grade(form._grade),
+    _grade2sign(form._grade2sign),
+    _grade2exec(form._grade2exec),
     _is_signed(false)
 {}
 
-Form Form::operator = (const Form &form){
-    return Form(form.getName(), form.getGrade());
+Form & Form::operator = (Form &form){
+    (void)form;
+    std::cout << "Is not possible make a copy of form without authorization\n";
+    return(*this);
 }
 
 const std::string Form::getName ( void ) const{
-    return (this->_name);
+    std::string form_name = this->_name.size() ? this->_name : "TOP-SECRET";
+    return (form_name);
 }
 
-int Form::getGrade ( void ) const{
-    return (this->_grade);
+int Form::getGrade2Sign ( void ) const{
+    return (this->_grade2sign);
+}
+
+int Form::getGrade2Exec ( void ) const{
+    return (this->_grade2exec);
 }
 
 bool Form::isSigned ( void ){
@@ -39,7 +48,7 @@ bool Form::isSigned ( void ){
 }
 
 void Form::beSigned ( const Bureaucrat &bureaucrat){
-    if (bureaucrat.getGrade() > this->_grade){
+    if (bureaucrat.getGrade() > this->_grade2sign){
         throw Form::GradeTooLowException();
     } else {
         this->_is_signed = true;
@@ -56,15 +65,16 @@ Form::GradeTooLowException::GradeTooLowException() :
 // Overload stream output
 std::ostream &operator<<(std::ostream &os, Form &form)
 {
-    if (form.getName().size()) {
-        os << "\033[1;34m" << form.getName() << ", form grade " << form.getGrade();
-    } else {
-        os << "\033[1;34m" << "TOP-SECRET" << ", form grade " << form.getGrade();
-    }
-    if (form.isSigned()) {
-        os << " is signed.\033[0m\n";
-    } else {
-        os << " is not signed.\033[0m\n";
-    }
-    return os;
+    const std::string color("\033[1;34m");
+    const std::string reset_color("\033[0m");
+    std::string form_name = form.getName().size() ? form.getName() : "TOP-SECRET";
+    std::string form_status = form.isSigned() ? "✅" : "❌";
+
+    os << color << "fom " << std::left << std::setfill(' ') <<  std::setw(11) << form_name  + ",";
+    os << " grade{to_sign: "<< reset_color;
+    os << std::right << std::setfill(' ') <<  std::setw(3) << form.getGrade2Sign();
+    os << color << ", to_exec: " << reset_color;
+    os << std::right << std::setfill(' ') <<  std::setw(3) << form.getGrade2Exec();
+    os << color << "} is signed " << form_status <<"\n" << reset_color;
+    return os;  
 }

@@ -4,7 +4,7 @@
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
-    std::cout << "Bureaucrat constructor called\n";
+    // std::cout << "Bureaucrat constructor called\n";
     if (this->_grade > this->_minGrade)
         throw Bureaucrat::GradeTooLowException();
     if (this->_grade < this->_maxGrade)
@@ -13,17 +13,17 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 
 Bureaucrat::~Bureaucrat(void)
 {
-    std::cout << "Bureaucrat destructor called\n";
+    // std::cout << "Bureaucrat destructor called\n";
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat) : _name(bureaucrat._name), _grade(bureaucrat._grade)
 {
-    std::cout << "Bureaucrat copy constructor called\n";
+    // std::cout << "Bureaucrat copy constructor called\n";
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &bureaucrat)
 {
-    std::cout << "Bureaucrat copy operator called\n";
+    // std::cout << "Bureaucrat copy operator called\n";
     this->_grade = bureaucrat._grade;
     return (*this);
 }
@@ -66,7 +66,7 @@ void Bureaucrat::signForm( Form *form ) const
         form->beSigned(*this);
         std::cout << this->getName() << " signed " << form->getName() << ".\n";
     } catch(const Form::GradeTooLowException & e) {
-        std::cout << this->getName() << " couldn't sign " << form->getName() << " because grade is too low.\n";
+        std::cout << this->getName() << " couldn't sign form " << form->getName() << " because your grade is too low.\n";
     }
 }
 
