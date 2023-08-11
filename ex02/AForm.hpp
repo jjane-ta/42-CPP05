@@ -8,7 +8,6 @@
 # include <string>
 # include <stdexcept>
 # include "Bureaucrat.hpp"
-class Bureaucrat;
 
 // ************************************************************************** //
 //                              AForm Class                                
@@ -27,10 +26,12 @@ public:
 	int					getGrade2Sign	( void ) const;
 	int					getGrade2Exec	( void ) const;
 	bool				isSigned		( void );
-	void				beSigned		( const Bureaucrat &bureaucrat);
+	void				beSigned		( const Bureaucrat & bureaucrat);
 
-	class GradeTooHighException :public std::runtime_error { public: GradeTooHighException();};
-    class GradeTooLowException  :public std::runtime_error { public: GradeTooLowException ();};
+	void	execute	(Bureaucrat const & executor) const;
+
+	class	GradeTooHighException :public std::runtime_error { public: GradeTooHighException();};
+    class	GradeTooLowException  :public std::runtime_error { public: GradeTooLowException ();};
 
 private:	
 

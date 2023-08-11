@@ -4,7 +4,7 @@
 #include <exception>
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 void	main_print_banner(std::string title);
 

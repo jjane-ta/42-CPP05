@@ -1,50 +1,38 @@
 
 #pragma once
-#ifndef __FORM_H__
-# define __FORM_H__
+#ifndef __PRESIDENTIALPARDONFORM_H__
+# define __PRESIDENTIALPARDONFORM_H__
 
 # include <iostream>
 # include <iomanip>
 # include <string>
 # include <stdexcept>
-# include "Bureaucrat.hpp"
+# include "AForm.hpp"
+
 class Bureaucrat;
 
 // ************************************************************************** //
-//                              Form Class                                
+//                              PresidentialPardonForm Class                                
 // ************************************************************************** //
 
-class Form {
+class PresidentialPardonForm: AForm {
 
 public:
     
-	Form ( std::string name, int grade2sign, int grade2exec );
-	virtual ~Form ( void );
-	Form (const Form &form);
-	Form & operator = (Form &form);
+	PresidentialPardonForm( std::string target );
+	virtual ~PresidentialPardonForm ( void );
+	PresidentialPardonForm (const PresidentialPardonForm & form);
+	PresidentialPardonForm operator = (const PresidentialPardonForm & form);
 
-	const std::string	getName			( void ) const;
-	int					getGrade2Sign	( void ) const;
-	int					getGrade2Exec	( void ) const;
-	bool				isSigned		( void );
-	void				beSigned		( const Bureaucrat &bureaucrat);
+private:
+	static const int	_grade2sign;
+	static const int	_grade2exec;
+	std::string			_target;
 
-	class GradeTooHighException :public std::runtime_error { public: GradeTooHighException();};
-    class GradeTooLowException  :public std::runtime_error { public: GradeTooLowException ();};
-
-private:	
-
-	const std::string	_name;
-	const int			_grade2sign;
-	const int			_grade2exec;
-	bool				_is_signed;
-
-	static const int    _maxGrade = 1;
-    static const int    _minGrade = 150;
 };
 
 // Overload output stream
-std::ostream & operator << (std::ostream& os, Form &form);
+std::ostream & operator << (std::ostream& os, PresidentialPardonForm &form);
 
-#endif /* __FORM_H__ */
+#endif /* __PRESIDENTIALPARDONFORM_H__ */
 
