@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
+#include <time.h>
 
 #include "AForm.hpp"
 
@@ -16,4 +18,6 @@ private:
     RobotomyRequestForm(void);
     RobotomyRequestForm(const RobotomyRequestForm &instance);
     RobotomyRequestForm operator=(const RobotomyRequestForm &instance);
+
+    const std::string _target;
 };

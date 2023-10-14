@@ -16,4 +16,6 @@ private:
     PresidentialPardonForm(void);
     PresidentialPardonForm(const PresidentialPardonForm &instance);
     PresidentialPardonForm operator=(const PresidentialPardonForm &instance);
+
+    const std::string _target;
 };

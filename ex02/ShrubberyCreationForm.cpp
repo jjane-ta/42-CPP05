@@ -1,6 +1,7 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm(target, 145, 137) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+    : AForm("Shrubbery Creation", 145, 137), _target(target) {}
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {}
 int ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
@@ -10,7 +11,7 @@ int ShrubberyCreationForm::execute(Bureaucrat const &executor) const
         return 1;
     }
 
-    std::ofstream myfile((this->getName() + "_shrubbery").c_str(), std::ios::trunc);
+    std::ofstream myfile((this->_target + "_shrubbery").c_str(), std::ios::trunc);
     if (myfile.is_open())
     {
         myfile << "       ###          ###           ###          ###    " << std::endl;

@@ -16,4 +16,6 @@ private:
     ShrubberyCreationForm(void);
     ShrubberyCreationForm(const ShrubberyCreationForm &instance);
     ShrubberyCreationForm operator=(const ShrubberyCreationForm &instance);
+
+    const std::string _target;
 };

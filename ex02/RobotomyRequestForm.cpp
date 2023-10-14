@@ -1,8 +1,6 @@
 #include "RobotomyRequestForm.hpp"
-#include <stdlib.h>
-#include <time.h>
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm(target, 72, 45) {}
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy Request", 72, 45), _target(target) {}
 RobotomyRequestForm::~RobotomyRequestForm(void) {}
 int RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
@@ -24,8 +22,8 @@ int RobotomyRequestForm::execute(Bureaucrat const &executor) const
     }
     std::cout << "...\n";
     if (rand() % 2)
-        std::cout << this->getName() << " has been robotomized\n";
+        std::cout << this->_target << " has been robotomized\n";
     else
-        std::cout << this->getName() << " robotomy failed\n";
+        std::cout << this->_target << " robotomy failed\n";
     return 0;
 }
