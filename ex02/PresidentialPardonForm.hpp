@@ -1,38 +1,19 @@
-
 #pragma once
-#ifndef __PRESIDENTIALPARDONFORM_H__
-# define __PRESIDENTIALPARDONFORM_H__
+#include <iostream>
+#include <fstream>
 
-# include <iostream>
-# include <iomanip>
-# include <string>
-# include <stdexcept>
-# include "AForm.hpp"
+#include "AForm.hpp"
 
-class Bureaucrat;
-
-// ************************************************************************** //
-//                              PresidentialPardonForm Class                                
-// ************************************************************************** //
-
-class PresidentialPardonForm: AForm {
-
+class PresidentialPardonForm : public AForm
+{
 public:
-    
-	PresidentialPardonForm( std::string target );
-	virtual ~PresidentialPardonForm ( void );
-	PresidentialPardonForm (const PresidentialPardonForm & form);
-	PresidentialPardonForm operator = (const PresidentialPardonForm & form);
+    PresidentialPardonForm(std::string target);
+    virtual ~PresidentialPardonForm(void);
+    virtual int execute(Bureaucrat const &executor) const;
 
+protected:
 private:
-	static const int	_grade2sign;
-	static const int	_grade2exec;
-	std::string			_target;
-
+    PresidentialPardonForm(void);
+    PresidentialPardonForm(const PresidentialPardonForm &instance);
+    PresidentialPardonForm operator=(const PresidentialPardonForm &instance);
 };
-
-// Overload output stream
-std::ostream & operator << (std::ostream& os, PresidentialPardonForm &form);
-
-#endif /* __PRESIDENTIALPARDONFORM_H__ */
-

@@ -1,50 +1,19 @@
-
 #pragma once
-#ifndef __FORM_H__
-# define __FORM_H__
+#include <iostream>
+#include <fstream>
 
-# include <iostream>
-# include <iomanip>
-# include <string>
-# include <stdexcept>
-# include "Bureaucrat.hpp"
-class Bureaucrat;
+#include "AForm.hpp"
 
-// ************************************************************************** //
-//                              Form Class                                
-// ************************************************************************** //
-
-class Form {
-
+class ShrubberyCreationForm : public AForm
+{
 public:
-    
-	Form ( std::string name, int grade2sign, int grade2exec );
-	virtual ~Form ( void );
-	Form (const Form &form);
-	Form & operator = (Form &form);
+    ShrubberyCreationForm(std::string target);
+    virtual ~ShrubberyCreationForm(void);
+    virtual int execute(Bureaucrat const &executor) const;
 
-	const std::string	getName			( void ) const;
-	int					getGrade2Sign	( void ) const;
-	int					getGrade2Exec	( void ) const;
-	bool				isSigned		( void );
-	void				beSigned		( const Bureaucrat &bureaucrat);
-
-	class GradeTooHighException :public std::runtime_error { public: GradeTooHighException();};
-    class GradeTooLowException  :public std::runtime_error { public: GradeTooLowException ();};
-
-private:	
-
-	const std::string	_name;
-	const int			_grade2sign;
-	const int			_grade2exec;
-	bool				_is_signed;
-
-	static const int    _maxGrade = 1;
-    static const int    _minGrade = 150;
+protected:
+private:
+    ShrubberyCreationForm(void);
+    ShrubberyCreationForm(const ShrubberyCreationForm &instance);
+    ShrubberyCreationForm operator=(const ShrubberyCreationForm &instance);
 };
-
-// Overload output stream
-std::ostream & operator << (std::ostream& os, Form &form);
-
-#endif /* __FORM_H__ */
-
